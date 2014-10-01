@@ -152,6 +152,51 @@ class UserRealNameField(StrippedNonEmptyCharField):
             return super(UserRealNameField, self).clean(real_name)
         except forms.ValidationError:
             raise forms.ValidationError(self.error_messages['required'])
+        
+class UserNameValidationField(StrippedNonEmptyCharField):
+    def __init__(self,**kw):
+       error_messages={'required':_('Real name is required')
+                    }
+       super(UserNameValidationField,self).__init__(max_length=0,
+                widget=forms.TextInput(attrs=login_form_widget_attrs),
+                label="Validation user",
+                error_messages=error_messages,
+                **kw
+                )
+       super(UserNameValidationField,self).__init__(widget=forms.TextInput(attrs=dict(login_form_widget_attrs,
+            maxlength=200)), label="Human test",
+            error_messages={
+                            'invalid':_('please probe you are not a robot by not filling this')
+                            },
+            **kw
+            )
+
+
+    
+    def validate(self, value):
+        if value not in self.empty_values:
+            raise ValidationError(self.error_messages['invalid'], code='invalid')
+        else:
+            return value
+        
+class UserNameValidationSumField(StrippedNonEmptyCharField):
+    def __init__(self,**kw):
+       
+         super(UserNameValidationSumField,self).__init__(widget=forms.TextInput(attrs=dict(login_form_widget_attrs,
+            maxlength=200)), label="What is seven plus seven?",
+            error_messages={
+                            'invalid':_('please probe you are not a robot by filling this simple sum correctly')
+                            },
+            **kw
+            )
+
+    
+    def validate(self, value):
+        if value != 14:
+            raise ValidationError(self.error_messages['invalid'], code='invalid')
+        else:
+            return value
+   
 
 class SetPasswordForm(forms.Form):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs=login_form_widget_attrs),

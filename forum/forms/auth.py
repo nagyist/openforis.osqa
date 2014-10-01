@@ -1,4 +1,4 @@
-from general import NextUrlField,  UserNameField,  UserEmailField, UserRealNameField, SetPasswordForm
+from general import NextUrlField,  UserNameField,  UserEmailField, UserRealNameField, UserNameValidationField, UserNameValidationSumField, SetPasswordForm
 from forum.models import Question, User
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
@@ -11,6 +11,8 @@ class SimpleRegistrationForm(forms.Form):
     username = UserNameField()
     email = UserEmailField()
     real_name = UserRealNameField()
+    username_validation = UserNameValidationField()
+    username_validation_sum = UserNameValidationSumField()
 
 class TemporaryLoginRequestForm(forms.Form):
     def __init__(self, data=None):

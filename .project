@@ -3,6 +3,7 @@
 	<name>osqa-pydev</name>
 	<comment></comment>
 	<projects>
+		<project>DjangoSrc</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
