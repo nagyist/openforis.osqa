@@ -42,30 +42,6 @@ class AolAuthContext(ConsumerTemplateContext):
     human_name = 'AOL'
     icon = '/media/images/openid/aol.png'
 
-
-class MyOpenIdAuthConsumer(OpenIdAbstractAuthConsumer):
-    dataype2ax_schema = {
-        #'username': ('http://schema.openid.net/namePerson/friendly', 'friendly'),
-        'email': 'http://schema.openid.net/contact/email',
-        #'web': 'http://schema.openid.net/contact/web/default',
-        #'birthdate': ('http://schema.openid.net/birthDate', 'birthDate'),
-    }
-
-    def get_user_url(self, request):
-        blog_name = request.POST['input_field']
-        return "http://%s.myopenid.com/" % blog_name
-
-class MyOpenIdAuthContext(ConsumerTemplateContext):
-    mode = 'BIGICON'
-    type = 'SIMPLE_FORM'
-    simple_form_context = {
-        'your_what': 'MyOpenID user name'
-    }
-    weight = 400
-    human_name = 'MyOpenID'
-    icon = '/media/images/openid/myopenid_big.png'
-
-
 class FlickrAuthConsumer(OpenIdAbstractAuthConsumer):
     def get_user_url(self, request):
         blog_name = request.POST['input_field']
