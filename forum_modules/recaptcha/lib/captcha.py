@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import urllib2, urllib
+import json
+from json import load as load_json
+
 
 API_SSL_SERVER="https://www.google.com/recaptcha/api"
 API_SERVER="http://www.google.com/recaptcha/api"
@@ -14,28 +17,31 @@ class RecaptchaResponse(object):
 def displayhtml (public_key):
 
     return """
-    <div id="recaptcha_field"></div>
-    <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
-
+    <div id="g-recaptcha"></div>
+    
     <script type="text/javascript">
-         $(function(){
-             Recaptcha.create("%(PublicKey)s", 'recaptcha_field', {
-             theme: "red"});
-         });
+    	var onloadCallback = function() {
+      		grecaptcha.render('g-recaptcha', {
+          		'sitekey' : '%(PublicKey)s',
+          		'theme' : "light",
+        	});
+      	};
     </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    
+    
 
 """ % {
         'PublicKey' : public_key,
         }
 
 
-def submit (recaptcha_challenge_field,
-            recaptcha_response_field,
+def submit (recaptcha_response_field,
             private_key,
             remoteip):
 
-    if not (recaptcha_response_field and recaptcha_challenge_field and
-            len (recaptcha_response_field) and len (recaptcha_challenge_field)):
+    if not (recaptcha_response_field and
+            len (recaptcha_response_field)):
         return RecaptchaResponse (is_valid = False, error_code = 'incorrect-captcha-sol')
 
 
@@ -45,14 +51,13 @@ def submit (recaptcha_challenge_field,
         return s
 
     params = urllib.urlencode ({
-        'privatekey': encode_if_necessary(private_key),
+        'secret': encode_if_necessary(private_key),
         'remoteip' :  encode_if_necessary(remoteip),
-        'challenge':  encode_if_necessary(recaptcha_challenge_field),
         'response' :  encode_if_necessary(recaptcha_response_field),
         })
 
     request = urllib2.Request (
-        url = "http://%s/recaptcha/api/verify" % VERIFY_SERVER,
+        url = "https://%s/recaptcha/api/siteverify" % VERIFY_SERVER,
         data = params,
         headers = {
             "Content-type": "application/x-www-form-urlencoded",
@@ -60,14 +65,9 @@ def submit (recaptcha_challenge_field,
         }
     )
 
-    httpresp = urllib2.urlopen(request)
-
-    return_values = httpresp.read().splitlines()
-    httpresp.close()
-
-    return_code = return_values[0]
-
-    if return_code == "true":
+  
+    json_values = load_json(urllib2.urlopen(request))
+    if json_values["success"]:
         return RecaptchaResponse(is_valid = True)
     else:
-        return RecaptchaResponse(is_valid = False, error_code = return_values[1])
+        return RecaptchaResponse(is_valid = False, error_code = json.dumps(json_values) )

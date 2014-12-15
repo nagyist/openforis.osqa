@@ -218,9 +218,7 @@ def external_register(request):
         'next': '/',
         'username': username,
         'email': email,
-        'real_name': real_name,
-        'username_validation': username_validation,
-        'username_validation_sum': username_validation_sum,
+        'real_name': real_name
         })
 
     provider_context = AUTH_PROVIDERS[request.session['auth_provider']].context
