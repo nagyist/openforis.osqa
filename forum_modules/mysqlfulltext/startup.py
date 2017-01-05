@@ -55,4 +55,5 @@ def question_search(self, keywords):
             },
         select_params=[keywords, keywords, keywords]
     ).filter(Q(ftsindex__title__search=keywords) | Q(ftsindex__tagnames__search=keywords) | Q(ftsindex__body__search=keywords))
+    #.filter(Q(ftsindex__title__search=keywords) | Q(ftsindex__tagnames__search=keywords) | Q(ftsindex__body__search=keywords))
     return '-ranking', qs
