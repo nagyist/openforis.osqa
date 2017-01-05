@@ -27,8 +27,18 @@
     <form action="{% url "search" %}" method="get">
         {% csrf_token %}
         <div>
-            <input type="text" class="searchInput" value="{{ keywords }}" name="q" id="keywords" />
-            <input type="submit" name="Submit" value="{% trans "search" %}" class="searchBtn" />
+            <script>
+			  (function() {
+			    var cx = '011544878288102132035:auatq0p6-wo';
+			    var gcse = document.createElement('script');
+			    gcse.type = 'text/javascript';
+			    gcse.async = true;
+			    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+			    var s = document.getElementsByTagName('script')[0];
+			    s.parentNode.insertBefore(gcse, s);
+			  })(); 
+			</script>
+			<gcse:search></gcse:search>
         </div>
         <div class="options">
             <input id="type-question" type="radio" value="question" name="t" 
