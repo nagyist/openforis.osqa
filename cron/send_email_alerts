@@ -1,4 +1,5 @@
 #!/bin/sh
+
 PYTHONPATH=/work/osqa-server
 export PYTHONPATH
 PROJECT_ROOT=$PYTHONPATH/OSQA

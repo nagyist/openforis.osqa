@@ -99,6 +99,7 @@ def ask(request):
                     if request.user.is_authenticated():
                         messages.info(request, _("Your question is pending until you %s.") % html.hyperlink(
                             settings.APP_URL + reverse('send_validation_email', prefix='/'), _("validate your email")
+
                         ))
                         return HttpResponseRedirect(reverse('index'))
                     else:

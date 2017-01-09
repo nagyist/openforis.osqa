@@ -42,6 +42,7 @@ class AolAuthContext(ConsumerTemplateContext):
     human_name = 'AOL'
     icon = '/media/images/openid/aol.png'
 
+
 class FlickrAuthConsumer(OpenIdAbstractAuthConsumer):
     def get_user_url(self, request):
         blog_name = request.POST['input_field']

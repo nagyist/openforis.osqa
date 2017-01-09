@@ -57,6 +57,7 @@
                 {% endif %}
                 {{ form1.real_name }}
             </div>
+
             <div class="form-row-vertical margin-bottom">
                 <label for="id_username_validation_sum">{{ form1.username_validation_sum.label }}</label>
                 {% if form1.username_validation_sum.errors %}
@@ -69,6 +70,7 @@
                 <label for="id_username_validation">DO NOT FILL ONLY ROBOTS FILL THIS, UINSEEN FOR REAL USERS</label>
                {{ form1.username_validation }}
             </div>
+
             {% if form1.password1 %}
                 <div class="form-row-vertical margin-bottom">
                     <label for="password1_id">{{ form1.password1.label }}</label>

@@ -1,4 +1,5 @@
 from general import NextUrlField,  UserNameField,  UserEmailField, UserRealNameField, UserNameValidationField, UserNameValidationSumField, SetPasswordForm
+
 from forum.models import Question, User
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _

@@ -4,7 +4,6 @@ import urllib2, urllib
 import json
 from json import load as load_json
 
-
 API_SSL_SERVER="https://www.google.com/recaptcha/api"
 API_SERVER="http://www.google.com/recaptcha/api"
 VERIFY_SERVER="www.google.com"
@@ -28,8 +27,7 @@ def displayhtml (public_key):
       	};
     </script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-    
-    
+
 
 """ % {
         'PublicKey' : public_key,
@@ -57,6 +55,7 @@ def submit (recaptcha_response_field,
         })
 
     request = urllib2.Request (
+
         url = "https://%s/recaptcha/api/siteverify" % VERIFY_SERVER,
         data = params,
         headers = {
@@ -65,7 +64,7 @@ def submit (recaptcha_response_field,
         }
     )
 
-  
+ 
     json_values = load_json(urllib2.urlopen(request))
     if json_values["success"]:
         return RecaptchaResponse(is_valid = True)

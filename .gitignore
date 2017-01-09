@@ -4,7 +4,5 @@
 .project
 log/django.osqa.log
 tmp/*
-
 osqa.wsgi
-settings_local.py
 settings_local.py

@@ -29,7 +29,6 @@ class TitleField(forms.CharField):
 
         if len(value) < settings.FORM_MIN_QUESTION_TITLE:
             raise forms.ValidationError(_('title must be at least %s characters') % settings.FORM_MIN_QUESTION_TITLE)
-
         return value
 
 class EditorField(forms.CharField):

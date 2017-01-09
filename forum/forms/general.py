@@ -152,7 +152,7 @@ class UserRealNameField(StrippedNonEmptyCharField):
             return super(UserRealNameField, self).clean(real_name)
         except forms.ValidationError:
             raise forms.ValidationError(self.error_messages['required'])
-        
+
 class UserNameValidationField(StrippedNonEmptyCharField):
     def __init__(self,**kw):
        error_messages={'required':_('Real name is required')

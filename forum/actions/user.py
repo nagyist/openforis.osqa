@@ -166,6 +166,7 @@ class AwardAction(ActionProxy):
 
                    
         messages.add_message(REQUEST_HOLDER.request, messages.INFO, _(
+
                 """Congratulations, you have received a badge '%(badge_name)s'. <a href="%(badge_url)s">Find out who has it, too</a>."""
         ) % dict(
             badge_name=award.badge.name,

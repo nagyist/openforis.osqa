@@ -169,3 +169,4 @@ def get_url_host(request):
 
 def get_full_url(request):
     return get_url_host(request) + request.get_full_path()
+
