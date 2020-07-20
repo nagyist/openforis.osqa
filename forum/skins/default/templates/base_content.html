@@ -11,16 +11,16 @@
         {% if settings.GOOGLE_SITEMAP_CODE %}
         <meta name="google-site-verification" content="{{ settings.GOOGLE_SITEMAP_CODE }}" />
         {% endif %}
-
+        <script type="text/javascript" charset="UTF-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
         <link rel="shortcut icon" href="{{ settings.APP_URL }}/{{ settings.APP_FAVICON }}" />
 
         <link href="{% media  "/media/style/style.css" %}" rel="stylesheet" type="text/css" />
         {% if settings.USE_CUSTOM_CSS|or_preview:request %}
         <link href="{% url "custom_css" %}" rel="stylesheet" type="text/css" />
         {% endif %}
-
-        <link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" />
-
+        <!--<link rel="stylesheet" type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/latest/themes/base/jquery-ui.css" />-->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/smoothness/jquery-ui.css" />
         <!--[if IE 6]>
         <style type="text/css">
         img, div, a { behavior: url({% media "/media/iepngfix/iepngfix.htc" %}) }
@@ -31,8 +31,8 @@
         <script src="http://www.google.com/jsapi" type="text/javascript"></script>
         <script type="text/javascript">
         /*<![CDATA[*/
-            google.load("jquery", "1");
-            google.load("jqueryui", "1", {autoload:true});
+            //google.load("jquery", "1");
+            //google.load("jqueryui", "1", {autoload:true});
 
             var i18nLang = '{{ settings.LANGUAGE_CODE }}';
             var appUrl = '{{ settings.APP_URL }}'
