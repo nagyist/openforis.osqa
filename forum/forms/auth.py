@@ -1,11 +1,10 @@
 from general import NextUrlField,  UserNameField,  UserEmailField, UserRealNameField, UserNameValidationField, UserNameValidationSumField, SetPasswordForm
 
-from forum.models import Question, User
-from django.contrib.contenttypes.models import ContentType
+from forum.models import User
 from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
 from django import forms
-import logging
+
 
 class SimpleRegistrationForm(forms.Form):
     next = NextUrlField()

@@ -6,7 +6,6 @@ from forum import settings
 from forum.models import User
 from forum.modules import call_all_handlers
 import urllib
-import logging
 
 DEFAULT_NEXT = getattr(settings, 'APP_BASE_URL')
 def clean_next(next):
@@ -175,7 +174,7 @@ class UserNameValidationField(StrippedNonEmptyCharField):
     
     def validate(self, value):
         if value not in self.empty_values:
-            raise ValidationError(self.error_messages['invalid'], code='invalid')
+            raise forms.ValidationError(self.error_messages['invalid'], code='invalid')
         else:
             return value
         
@@ -193,7 +192,7 @@ class UserNameValidationSumField(StrippedNonEmptyCharField):
     
     def validate(self, value):
         if value != 14:
-            raise ValidationError(self.error_messages['invalid'], code='invalid')
+            raise forms.ValidationError(self.error_messages['invalid'], code='invalid')
         else:
             return value
    
